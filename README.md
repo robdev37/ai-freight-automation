@@ -24,3 +24,10 @@ Automates freight request processing using AI — reduce manual work, speed up r
 - Daily backup to AWS S3
 
 ## Project Structure
+
+## Setup
+1. Clone the repo
+2. Add your `.env` file with `OPENAI_API_KEY`
+3. Add your `credentials.json` from Google Cloud
+4. Configure AWS credentials via `aws configure`
+5. Run `python main.py`
