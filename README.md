@@ -21,3 +21,8 @@ Automates freight request processing using OpenAI and Google Sheets.
 2. Add your `.env` file with `OPENAI_API_KEY`
 3. Add your `credentials.json` from Google Cloud
 4. Run `python main.py`
+
+## Deployment
+- Deployed on AWS EC2 (t3.micro, Amazon Linux 2023)
+- Runs on cloud server 24/7
+- Auto-logs to Google Sheets in real-time
