@@ -14,6 +14,7 @@ Automates freight request processing using AI — reduce manual work, speed up r
 - Stores and queries freight data in MySQL database
 - REST API with FastAPI for receiving and processing freight requests
 - Webhook endpoint for real-time event notifications
+- AWS cost monitoring with automated Gmail alerts
 
 ## Results
 
@@ -25,6 +26,7 @@ Automates freight request processing using AI — reduce manual work, speed up r
 
 - Python, OpenAI GPT-4, Google Sheets API, AWS S3, boto3, gspread
 - MySQL, PyMySQL, FastAPI, Uvicorn
+- AWS Cost Explorer, Gmail SMTP
 
 ## Project Structure
 
@@ -36,6 +38,7 @@ ai-freight-automation/
 ├── s3_logger.py        # Upload, list, delete, and watch logs in S3
 ├── mysql_reporter.py   # Python MySQL daily report generator
 ├── freight_api.py      # FastAPI REST API with webhook support
+├── cost_alert.py       # AWS cost monitor with Gmail alert
 ├── .env                # API keys (not committed)
 ├── credentials.json    # Google Cloud credentials (not committed)
 └── README.md
@@ -61,6 +64,16 @@ ai-freight-automation/
 | `POST` | `/freight` | Create a new freight request |
 | `POST` | `/webhook` | Receive webhook event payloads |
 
+## AWS Cost Alert
+
+Monitors AWS monthly spending via boto3 and Cost Explorer. Sends automated Gmail alerts when spending exceeds the threshold ($10.00 USD), plus a daily summary email with current cost and budget status.
+
+| Function | Description |
+|---|---|
+| `get_aws_cost()` | Fetches current month AWS cost via Cost Explorer |
+| `send_daily_summary()` | Sends daily cost summary email via Gmail |
+| `send_email_alert()` | Sends alert email when cost exceeds threshold |
+
 ## MySQL Daily Report
 
 Connects Python to MySQL (`freight_db`) and generates automated daily reports including total requests, priority breakdown, and department summary.
@@ -73,13 +86,15 @@ Connects Python to MySQL (`freight_db`) and generates automated daily reports in
 - Daily backup to AWS S3
 - Auto-cleanup of logs older than 30 days
 - REST API running via Uvicorn on port 8000
+- Daily AWS cost alert via Gmail
 
 ## Setup
 
 1. Clone the repo
-2. Add your `.env` file with `OPENAI_API_KEY`
+2. Add your `.env` file with `OPENAI_API_KEY`, `GMAIL_ADDRESS`, `GMAIL_APP_PASSWORD`
 3. Add your `credentials.json` from Google Cloud
 4. Configure AWS credentials via `aws configure`
 5. Set up MySQL and run `python mysql_reporter.py`
 6. Start the API with `python freight_api.py`
-7. Run the full pipeline with `python main.py`
+7. Run cost alert with `python cost_alert.py`
+8. Run the full pipeline with `python main.py`
