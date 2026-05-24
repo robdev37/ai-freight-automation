@@ -1,3 +1,11 @@
+## Latest Update
+- Connected Gmail inbox — bot now reads and processes real emails automatically
+- Added confidence scoring (0.0–1.0) to every extraction
+- Auto-drafts professional reply emails per request type
+- Added `email_parser.py` to project
+
+---
+
 # 🚚 AI Freight Request Automation
 
 Automates freight request processing using AI — reduce manual work, speed up response time, and eliminate errors.
