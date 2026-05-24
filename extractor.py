@@ -1,3 +1,4 @@
+# AI Freight Request Automation — GPT-4 extraction pipeline
 import openai
 import logging
 import json

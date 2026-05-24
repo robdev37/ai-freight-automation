@@ -1,3 +1,4 @@
+# AI Freight Request Automation — Gmail API integration
 import os
 import base64
 import json
