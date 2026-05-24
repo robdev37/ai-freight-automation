@@ -33,25 +33,28 @@ Only continues if email matches freight-related keywords:
 | Or continue if | Subject | Contains `shipment` |
 | And | Subject | Contains `freight` |
 
-> Emails must match at least one condition group to pass through the filter.
-
 ### Step 3 — ChatGPT (OpenAI)
 - App: **ChatGPT (OpenAI)**
 - Model: `gpt-4o`
 - Instructions:
+
 ```
 You are a freight logistics AI. Extract and classify freight requests.
-Return ONLY this exact JSON structure, no backticks, no markdown:
+Return ONLY this exact JSON, no backticks, no markdown, no extra fields:
 {
-  "request_type": "Quote|Issue|Follow-up",
-  "origin": "city or Unknown",
-  "destination": "city or Unknown",
-  "quantity": "amount or Unknown",
-  "priority": "High|Medium",
-  "department": "Sales|Operations",
-  "recommended_action": "short action",
-  "confidence_score": 0.0
+  "request_type": "Quote",
+  "origin": "Manila",
+  "destination": "Dubai",
+  "quantity": "500kg",
+  "priority": "High",
+  "department": "Sales",
+  "recommended_action": "Provide shipment quote",
+  "confidence_score": 0.95
 }
+
+request_type must be: Quote, Issue, or Follow-up
+priority must be: High or Medium
+department must be: Sales or Operations
 ```
 
 ### Step 4 — Code by Zapier (Run Javascript)
@@ -72,15 +75,17 @@ const raw = inputData.gpt_response
 
 const data = JSON.parse(raw);
 
-return {
+output = {
   shipment_details: `Origin: ${data.origin} | Destination: ${data.destination} | Qty: ${data.quantity}`,
-  request_type:        data.request_type,
-  priority:            data.priority,
-  department:          data.department,
-  recommended_action:  data.recommended_action,
-  confidence_score:    String(data.confidence_score)
+  request_type:       data.request_type,
+  priority:           data.priority,
+  department:         data.department,
+  recommended_action: data.recommended_action,
+  confidence_score:   String(data.confidence_score)
 };
 ```
+
+> Note: Use `output =` not `return` — required syntax in Zapier Code steps.
 
 ### Step 5 — Google Sheets
 - App: **Google Sheets**
@@ -97,7 +102,6 @@ return {
 | Recommended Action | Step 4: `recommended_action` |
 | Confidence Score | Step 4: `confidence_score` |
 | Status | `New` (static text) |
-| Timestamp | Step 4: (auto) |
 
 ---
 
@@ -105,11 +109,25 @@ return {
 
 | Field | Value |
 |-------|-------|
+| Message | hi I need an urgent quote for 500kg from Manila to Dubai |
+| Quote | Quote |
 | Shipment Details | Origin: Manila \| Destination: Dubai \| Qty: 500kg |
 | Priority | High |
 | Department | Sales |
 | Recommended Action | Provide shipment quote |
 | Confidence Score | 0.95 |
+| Status | New |
+
+---
+
+## Troubleshooting
+
+| Problem | Cause | Fix |
+|---------|-------|-----|
+| `undefined` values in Step 4 | Code step not tested yet | Go to Step 4 → Test tab → Test step |
+| Raw JSON in Shipment Details | Step 5 mapped to Step 3 instead of Step 4 | Re-map to Step 4: `shipment_details` |
+| Wrong Quote column value | GPT returning wrong JSON structure | Fix Step 3 prompt — ensure exact JSON format |
+| `request_type` not in dropdown | Step 4 output not refreshed | Re-test Step 4 first, then re-open Step 5 |
 
 ---
 
