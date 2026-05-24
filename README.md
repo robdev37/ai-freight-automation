@@ -1,4 +1,5 @@
 ## Latest Update
+- Added Zapier automation support for external integrations
 - Connected Gmail inbox — bot now reads and processes real emails automatically
 - Added confidence scoring (0.0–1.0) to every extraction
 - Auto-drafts professional reply emails per request type
