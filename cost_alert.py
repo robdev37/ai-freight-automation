@@ -165,5 +165,6 @@ def send_daily_summary(cost, unit):
 # ──────────────────────────────────────────────
 
 if __name__ == "__main__":
+    # Test email directly without AWS
     send_daily_summary(2.50, "USD")
-    print("Test email sent! Check your Gmail.")
+    print("Test email sent!")

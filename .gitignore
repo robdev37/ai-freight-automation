@@ -1,2 +1,14 @@
-.env
-credentials.json
+# Ignore everything
+*
+
+# Except these project files
+!.gitignore
+!main.py
+!extractor.py
+!email_parser.py
+!sheets_logger.py
+!s3_logger.py
+!mysql_reporter.py
+!freight_api.py
+!cost_alert.py
+!README.md
