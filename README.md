@@ -6,14 +6,14 @@
 - Auto-drafts professional reply emails per request type
 - Added `email_parser.py` to project
 
----
+
 🎥 System Demo
 
 Watch the full walkthrough here:
 
 👉 https://your-youtube-link
 
-
+---
 # 🚚 AI Freight Request Automation
 
 Automates freight request processing using AI — reduce manual work, speed up response time, and eliminate errors.
