@@ -1,3 +1,4 @@
+
 ## Latest Update
 - Added Zapier automation support for external integrations
 - Connected Gmail inbox — bot now reads and processes real emails automatically
@@ -6,6 +7,13 @@
 - Added `email_parser.py` to project
 
 ---
+🎥 System Demo
+
+Watch the full walkthrough here:
+
+👉 https://your-youtube-link
+---
+
 
 # 🚚 AI Freight Request Automation
 
