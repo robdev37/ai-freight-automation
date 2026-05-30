@@ -11,7 +11,7 @@
 
 Watch the full walkthrough here:
 
-👉 [https://your-youtube-link](https://youtu.be/SxsUggaicaw)
+👉 https://youtu.be/SxsUggaicaw
 
 ---
 # 🚚 AI Freight Request Automation
