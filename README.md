@@ -13,8 +13,6 @@ Watch the full walkthrough here:
 
 👉 https://your-youtube-link
 
----
-
 
 # 🚚 AI Freight Request Automation
 
